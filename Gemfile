@@ -39,5 +39,12 @@ group :development do
   gem 'spring'
 end
 
+group :test do
+  gem 'database_cleaner'
+  gem 'factory_bot_rails', '~> 6.0'
+  gem 'faker'
+  gem 'shoulda-matchers', '~> 5.0'
+end
+
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
