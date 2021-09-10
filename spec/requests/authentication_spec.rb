@@ -19,8 +19,7 @@ RSpec.describe '/api/v1/auth', type: :request do
 
       before { post '/api/v1/auth', params: { email: user.email, password: user.password } }
 
-      it 'successfully authenticates user' do
-        expect(response).to have_http_status(200)
+      it 'returns ok status' do
         expect(response).to have_http_status(:ok)
       end
 
@@ -28,7 +27,7 @@ RSpec.describe '/api/v1/auth', type: :request do
         expect(response.body).to match(/Successfully authenticated/)
       end
 
-      it 'returns the user' do
+      it 'returns the user data' do
         expect(response.body).to match(/#{user.id}/)
         expect(response.body).to match(/#{user.username}/)
         expect(response.body).to match(/#{user.email}/)
