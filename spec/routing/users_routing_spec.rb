@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'spec_helper'
 
 RSpec.describe Api::V1::UsersController, type: :routing do
   describe 'routing' do
