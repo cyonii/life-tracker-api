@@ -7,8 +7,8 @@ module Api
         command = AuthenticateUser.call(params[:email], params[:password])
 
         if command.success?
-          render json: { auth_token: command.result, user: command.user, message: 'Successfully authenticated' },
-                 status: :ok
+          user_hash = UserSerializer.new(command.user).as_json
+          render json: { auth_token: command.result, user: user_hash }, status: :ok
         else
           render json: command.errors, status: :unauthorized
         end
