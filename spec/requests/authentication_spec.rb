@@ -23,10 +23,6 @@ RSpec.describe '/api/v1/auth', type: :request do
         expect(response).to have_http_status(:ok)
       end
 
-      it 'returns a success message' do
-        expect(response.body).to match(/Successfully authenticated/)
-      end
-
       it 'returns the user data' do
         expect(response.body).to match(/#{user.id}/)
         expect(response.body).to match(/#{user.username}/)
