@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
+  subject { build(:user) }
+
   let(:valid_attributes) { { username: 'jdoe', email: 'jdoe@email.com', password: 'pass123' } }
 
   subject { described_class.new(valid_attributes) }
