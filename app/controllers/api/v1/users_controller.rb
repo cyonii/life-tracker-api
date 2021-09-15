@@ -1,4 +1,4 @@
-module Api
+module API
   module V1
     class UsersController < ApplicationController
       before_action :set_user, only: %i[show update destroy]

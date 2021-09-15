@@ -1,4 +1,4 @@
-module Api
+module API
   module V1
     class ActivitiesController < ApplicationController
       before_action :set_activity, only: [:show]

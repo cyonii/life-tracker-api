@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Api::V1::ActivitiesController, type: :routing do
+RSpec.describe API::V1::ActivitiesController, type: :routing do
   let(:activity) { create(:activity) }
   let(:base_url) { 'api/v1/activities' }
 
