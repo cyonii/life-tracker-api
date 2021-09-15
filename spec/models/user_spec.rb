@@ -53,4 +53,8 @@ RSpec.describe User, type: :model do
     it { should validate_length_of(:username).is_at_least(2) }
     it { should validate_length_of(:password).is_at_least(6) }
   end
+
+  describe 'Associations' do
+    it { should have_many(:records).dependent(:destroy) }
+  end
 end
