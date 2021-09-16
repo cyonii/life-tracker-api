@@ -46,7 +46,7 @@ module API
 
       # Use callbacks to share common setup or constraints between actions.
       def set_record
-        @record = Record.find(params[:id])
+        @record = Record.find_by!(id: params[:id], activity_id: params[:activity_id])
       end
 
       # Only allow a list of trusted parameters through.
