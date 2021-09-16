@@ -6,7 +6,7 @@ module API
 
       # GET /records
       def index
-        @records = Record.all
+        @records = Record.where(activity_id: params[:activity_id])
 
         render json: @records
       end
