@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe '/records', type: :request do
+  # rubocop:disable Metrics/BlockLength
   context 'When user is the record owner' do
     describe 'GET /index' do
       it 'renders a successful response' do
@@ -115,6 +116,8 @@ RSpec.describe '/records', type: :request do
     end
   end
 
+  # rubocop:enable Metrics/BlockLength
+
   context 'When user is NOT record owner' do
     # All requests to /records should return a 403
     it "doesn't let access to activity record list to another user" do
@@ -139,3 +142,4 @@ RSpec.describe '/records', type: :request do
     end
   end
 end
+# rubocop disable Metrics/BlockLength
