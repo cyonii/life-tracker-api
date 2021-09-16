@@ -9,5 +9,5 @@
 activities = %w[Sleep Exercise Work Study]
 
 activities.each do |activity|
-  Activity.create!(name: activity)
+  Activity.create(name: activity)
 end
