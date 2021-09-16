@@ -32,8 +32,6 @@ rails db:create <!-- Creates database -->
 rails db:migrate <!-- Migrates database -->
 ```
 
-
-
 ## Database initialization
 
 This operation should seed the `Activity` table of the database.
@@ -109,7 +107,6 @@ POST /api/v1/auth
   password: 'password'
 }
 ```
-
 
 ```ruby
 # Response
@@ -349,7 +346,6 @@ This app has been tested using `RSpec`. To run the test suite, run this command:
 
 `rspec --format=documentation`
 
-
 ## Deployment instructions
 
 For easy deployment, see [Getting Started on Heroku with Rails 6.x
@@ -362,8 +358,6 @@ For easy deployment, see [Getting Started on Heroku with Rails 6.x
 - GitHub: [CY Kalu](https://github.com/cyonii)
 - LinkedIn: [Silas Kalu](https://www.linkedin.com/in/cyonii)
 
-<hr>
-
 ## Contributing 🤝
 
 Contributions, issues, and feature requests are welcome!
@@ -371,4 +365,3 @@ Contributions, issues, and feature requests are welcome!
 ## Support
 
 Give a ⭐️ if you like this project!
-   
