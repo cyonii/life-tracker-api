@@ -7,7 +7,7 @@ class ApplicationController < ActionController::API
   private
 
   def authenticate_request
-    @current_user = AuthorizeRequest.new(request.headers).user
+    @current_user = AuthorizeRequest.call(request.headers).result
     render json: { message: 'Not Authorized' }, status: :unauthorized unless @current_user
   end
 
