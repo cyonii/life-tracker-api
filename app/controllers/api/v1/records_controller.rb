@@ -9,7 +9,7 @@ module API
         @records = Record.where(activity_id: params[:activity_id], user_id: @current_user.id)
 
         if @records.length.zero? and Record.where(activity_id: params[:activity_id]).count.positive?
-          return render json: { message: 'Unauthorized' }, status: :unauthorized
+          return render json: { message: 'Forbidden' }, status: :forbidden
         end
 
         render json: @records
@@ -50,15 +50,10 @@ module API
 
       # Use callbacks to share common setup or constraints between actions.
       def set_record
-        @record = Record.find_by(id: params[:id], activity_id: params[:activity_id], user_id: @current_user.id)
+        @record = Record.find_by!(id: params[:id], activity_id: params[:activity_id])
+        is_owner = @record && @record.user_id == @current_user.id
 
-        # Return 403 response if record is NotFound
-        if @record and @record.user_id != @current_user.id
-          return render json: { message: 'Unauthorized' }, status: :unauthorized
-        end
-
-        # Return 404 response if record is NotFound
-        return render json: { message: 'Not Found' }, status: :not_found if @record.nil?
+        render json: { message: 'Forbidden' }, status: :forbidden unless is_owner
       end
 
       # Only allow a list of trusted parameters through.
