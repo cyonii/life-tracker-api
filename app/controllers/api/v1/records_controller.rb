@@ -9,7 +9,7 @@ module API
         @records = Record.where(activity_id: params[:activity_id], user_id: @current_user.id)
 
         if @records.length.zero? and Record.where(activity_id: params[:activity_id]).count.positive?
-          return render json: { message: 'Unauthorized' }, status: 403
+          return render json: { message: 'Unauthorized' }, status: :unauthorized
         end
 
         render json: @records
@@ -53,7 +53,12 @@ module API
         @record = Record.find_by(id: params[:id], activity_id: params[:activity_id], user_id: @current_user.id)
 
         # Return 403 response if record is NotFound
-        return render json: { message: 'Unauthorized' }, status: 403 unless @record
+        if @record and @record.user_id != @current_user.id
+          return render json: { message: 'Unauthorized' }, status: :unauthorized
+        end
+
+        # Return 404 response if record is NotFound
+        return render json: { message: 'Not Found' }, status: :not_found if @record.nil?
       end
 
       # Only allow a list of trusted parameters through.
