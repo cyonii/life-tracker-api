@@ -51,7 +51,7 @@ module API
       # Use callbacks to share common setup or constraints between actions.
       def set_record
         @record = Record.find_by!(id: params[:id], activity_id: params[:activity_id])
-        is_owner = @record && @record.user_id == @current_user.id
+        is_owner = @record && (@record.user_id == @current_user.id)
 
         render json: { message: 'Forbidden' }, status: :forbidden unless is_owner
       end
