@@ -65,7 +65,6 @@ POST /api/v1/users
 # Payload
 {
   user: {
-    username: "johndoe",
     email: "johndoe@email.com",
     password: "password"
   }
@@ -79,7 +78,6 @@ POST /api/v1/users
     "id": "1",
     "type": "users",
     "attributes": {
-      "username": "johndoe",
       "email": "johndoe@email.com"
     },
     "relationships": {
@@ -114,7 +112,6 @@ POST /api/v1/auth
   "auth_token": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjo0LCJleHAiOjE2MzE4MTI4NDR9.l19X2PRR2ZWJs4LJKc7WtprR8jGx7XQ9WCxtHcQ6iFw",
   "user": {
     "id": 4,
-    "username": "johndoe",
     "email": "johndoe@email.com"
   }
 }

@@ -2,11 +2,11 @@ require 'rails_helper'
 
 RSpec.describe 'api/v1/users', type: :request do
   let(:valid_attributes) do
-    { username: 'jdoe', email: 'jdoe@email.com', password: 'pass123' }
+    { email: 'jdoe@email.com', password: 'pass123' }
   end
 
   let(:invalid_attributes) do
-    { username: 'j', email: 'jdoe@email', password: 'pass' }
+    { email: 'jdoe@email', password: 'pass' }
   end
 
   let(:valid_headers) do
@@ -23,7 +23,7 @@ RSpec.describe 'api/v1/users', type: :request do
 
       expect(response).to be_successful
       expect(response.status).to eq(200)
-      expect(response.body).to include(user.id.to_s, user.username, user.email)
+      expect(response.body).to include(user.id.to_s, user.email)
     end
   end
 
@@ -41,7 +41,6 @@ RSpec.describe 'api/v1/users', type: :request do
         expect(response).to have_http_status(:created)
         expect(response.body).to include(
           valid_attributes[:id].to_s,
-          valid_attributes[:username],
           valid_attributes[:email]
         )
       end
@@ -72,7 +71,7 @@ RSpec.describe 'api/v1/users', type: :request do
 
     context 'with valid parameters' do
       let(:new_attributes) do
-        { username: 'jdoe', email: 'new@email.com', password: 'newpass' }
+        { email: 'new@email.com', password: 'newpass' }
       end
 
       it 'updates the requested user' do
@@ -85,7 +84,7 @@ RSpec.describe 'api/v1/users', type: :request do
       it 'renders a JSON response with the user' do
         patch api_v1_user_url(user), params: { user: new_attributes }, headers: valid_headers
 
-        expect(response.body).to include(new_attributes[:username], new_attributes[:email])
+        expect(response.body).to include(new_attributes[:email])
       end
     end
 

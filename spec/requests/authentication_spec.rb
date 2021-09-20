@@ -25,7 +25,6 @@ RSpec.describe '/api/v1/auth', type: :request do
 
       it 'returns the user data' do
         expect(response.body).to match(/#{user.id}/)
-        expect(response.body).to match(/#{user.username}/)
         expect(response.body).to match(/#{user.email}/)
       end
 
