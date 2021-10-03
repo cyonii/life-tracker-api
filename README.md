@@ -203,9 +203,9 @@ POST /api/v1/activities/<activity_id>/records
   headers: { Authorization: Bearer <auth_token> }
   payload: {
     "record": {
-      "duration: <float>, # 0.1 <= duration <= 1440
+      "duration": <float>, # 0.1 <= duration <= 1440
       "satisfaction": <integer>, # 0 <= satisfaction <= 10
-      "date": "2021-09-04,
+      "date": "2021-09-04",
       "activity_id": <integer>
     }
   }
