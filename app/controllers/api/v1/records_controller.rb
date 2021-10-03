@@ -1,12 +1,11 @@
 module API
   module V1
     class RecordsController < ApplicationController
-      before_action :verify_activity_existence
       before_action :set_record, only: %i[show update destroy]
 
       # GET /records
       def index
-        @records = Record.where(activity_id: params[:activity_id], user_id: @current_user.id)
+        @records = Record.where(user_id: @current_user.id)
 
         if @records.length.zero? and Record.where(activity_id: params[:activity_id]).count.positive?
           return render json: { message: 'Forbidden' }, status: :forbidden
@@ -50,7 +49,7 @@ module API
 
       # Use callbacks to share common setup or constraints between actions.
       def set_record
-        @record = Record.find_by!(id: params[:id], activity_id: params[:activity_id])
+        @record = Record.find_by!(id: params[:id])
         is_owner = @record && (@record.user_id == @current_user.id)
 
         render json: { message: 'Forbidden' }, status: :forbidden unless is_owner
@@ -59,12 +58,6 @@ module API
       # Only allow a list of trusted parameters through.
       def record_params
         params.require(:record).permit(:duration, :satisfaction, :date, :activity_id)
-      end
-
-      def verify_activity_existence
-        # Return 404 response if activity is NotFound
-        # even before attempting anything else
-        Activity.find(params[:activity_id])
       end
     end
   end
