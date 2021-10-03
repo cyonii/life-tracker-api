@@ -261,7 +261,7 @@ PATCH /api/v1/records/<id>
 # Returns the updated Record object
 ```
 
-##### `GET` all `Record`s of a particular `Activity`
+##### `GET` all `Record`s
 
 ```ruby
 # Request
