@@ -2,9 +2,8 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :users, except: [:index]
-      resources :activities, only: %i[index show] do
-        resources :records
-      end
+      resources :activities, only: %i[index show]
+      resources :records
       post 'auth', to: 'authentication#authenticate'
     end
   end

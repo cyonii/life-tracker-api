@@ -199,7 +199,7 @@ All `CRUD` endpoints is exposed for the `Record` resource.
 
 ```ruby
 # Request
-POST /api/v1/activities/<activity_id>/records 
+POST /api/v1/records 
   headers: { Authorization: Bearer <auth_token> }
   payload: {
     "record": {
@@ -242,7 +242,7 @@ POST /api/v1/activities/<activity_id>/records
 
 ```ruby
 # Request
-DELETE /api/v1/activities/<activity_id>/records/<record_id>
+DELETE /api/v1/records/<id>
   headers: { Authorization: Bearer <auth_token> }
 
 # Response
@@ -253,7 +253,7 @@ Status => 204 # Successfully deleted
 
 ```ruby
 # Request
-PATCH /api/v1/activities/<activity_id>/records/<record_id>
+PATCH /api/v1/records/<id>
   headers: { Authorization: Bearer <auth_token> }
   payload: {} # updated fields
 
@@ -265,7 +265,7 @@ PATCH /api/v1/activities/<activity_id>/records/<record_id>
 
 ```ruby
 # Request
-GET /api/v1/activities/<activity_id>/records
+GET /api/v1/records
   headers: { Authorization: Bearer <auth_token> }
 
 # Response
@@ -302,7 +302,7 @@ GET /api/v1/activities/<activity_id>/records
 
 ```ruby
 # Request
-GET /api/v1/activities/1/records/1
+GET /api/v1/records/<id>
   headers: { Authorization: Bearer <auth_token> }
 
 # Response

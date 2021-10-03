@@ -6,7 +6,7 @@ RSpec.describe '/records', type: :request do
     describe 'GET /index' do
       it 'renders a successful response' do
         record = create(:record)
-        get api_v1_activity_records_url(activity_id: record.activity_id),
+        get api_v1_records_url(activity_id: record.activity_id),
             headers: { Authorization: "Bearer #{JsonWebToken.encode(user_id: record.user_id)}" }
 
         expect(response).to have_http_status(:success)
@@ -17,7 +17,7 @@ RSpec.describe '/records', type: :request do
     describe 'GET /show' do
       it 'renders a successful response' do
         record = create(:record)
-        get api_v1_activity_record_url(record, activity_id: record.activity.id),
+        get api_v1_record_url(record, activity_id: record.activity.id),
             headers: { Authorization: "Bearer #{JsonWebToken.encode(user_id: record.user_id)}" }
 
         expect(response).to be_successful
@@ -32,14 +32,14 @@ RSpec.describe '/records', type: :request do
 
         it 'creates a new Record' do
           expect do
-            post api_v1_activity_records_url(activity_id: activity.id),
+            post api_v1_records_url(activity_id: activity.id),
                  params: { record: valid_attributes },
                  headers: { Authorization: "Bearer #{JsonWebToken.encode(user_id: user.id)}" }
           end.to change(Record, :count).by(1)
         end
 
         it 'renders a JSON response with the new record' do
-          post api_v1_activity_records_url(activity_id: activity.id),
+          post api_v1_records_url(activity_id: activity.id),
                params: { record: valid_attributes },
                headers: { Authorization: "Bearer #{JsonWebToken.encode(user_id: user.id)}" }
 
@@ -54,14 +54,14 @@ RSpec.describe '/records', type: :request do
 
         it 'does not create a new Record' do
           expect do
-            post api_v1_activity_records_url(activity_id: activity.id),
+            post api_v1_records_url(activity_id: activity.id),
                  params: { record: invalid_attributes },
                  headers: { Authorization: "Bearer #{JsonWebToken.encode(user_id: user.id)}" }
           end.to change(Record, :count).by(0)
         end
 
         it 'renders a JSON response with errors for the new record' do
-          post api_v1_activity_records_url(activity_id: activity.id),
+          post api_v1_records_url(activity_id: activity.id),
                params: { record: invalid_attributes },
                headers: { Authorization: "Bearer #{JsonWebToken.encode(user_id: user.id)}" }
           expect(response).to have_http_status(:unprocessable_entity)
@@ -75,7 +75,7 @@ RSpec.describe '/records', type: :request do
         new_attributes = { duration: '17', satisfaction: '1', date: Date.new }
 
         it 'updates the requested record' do
-          patch api_v1_activity_record_url(record, activity_id: record.activity_id),
+          patch api_v1_record_url(record, activity_id: record.activity_id),
                 params: { record: new_attributes },
                 headers: { Authorization: "Bearer #{JsonWebToken.encode(user_id: record.user_id)}" }
           record.reload
@@ -86,7 +86,7 @@ RSpec.describe '/records', type: :request do
         end
 
         it 'renders a JSON response with the record' do
-          patch api_v1_activity_record_url(record, activity_id: record.activity_id),
+          patch api_v1_record_url(record, activity_id: record.activity_id),
                 params: { record: new_attributes },
                 headers: { Authorization: "Bearer #{JsonWebToken.encode(user_id: record.user_id)}" }
           expect(response).to have_http_status(:ok)
@@ -96,7 +96,7 @@ RSpec.describe '/records', type: :request do
       context 'with invalid parameters' do
         it 'renders a JSON response with errors for the record' do
           record = create(:record)
-          patch api_v1_activity_record_url(record, activity_id: record.activity_id),
+          patch api_v1_record_url(record, activity_id: record.activity_id),
                 params: { record: { duration: '1445' } },
                 headers: { Authorization: "Bearer #{JsonWebToken.encode(user_id: record.user_id)}" }
           expect(response).to have_http_status(:unprocessable_entity)
@@ -109,7 +109,7 @@ RSpec.describe '/records', type: :request do
         record = create(:record)
 
         expect do
-          delete api_v1_activity_record_url(record, activity_id: record.activity_id),
+          delete api_v1_record_url(record, activity_id: record.activity_id),
                  headers: { Authorization: "Bearer #{JsonWebToken.encode(user_id: record.user_id)}" }
         end.to change(Record, :count).by(-1)
       end
@@ -126,7 +126,7 @@ RSpec.describe '/records', type: :request do
 
       2.times { create(:record, activity: activity) }
 
-      get api_v1_activity_records_url(activity_id: activity.id),
+      get api_v1_records_url(activity_id: activity.id),
           headers: { Authorization: "Bearer #{JsonWebToken.encode(user_id: user.id)}" }
       expect(response).to have_http_status(:forbidden)
     end
@@ -136,7 +136,7 @@ RSpec.describe '/records', type: :request do
       activity = create(:activity)
       record = create(:record, activity: activity)
 
-      get api_v1_activity_record_url(record, activity_id: activity.id),
+      get api_v1_record_url(record, activity_id: activity.id),
           headers: { Authorization: "Bearer #{JsonWebToken.encode(user_id: user.id)}" }
       expect(response).to have_http_status(:forbidden)
     end
